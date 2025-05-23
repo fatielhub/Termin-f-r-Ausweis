@@ -14,7 +14,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        return view('faq'); // Assurez-vous d'avoir une vue 'faq.blade.php'
+        return view('faq');
     }
 }
 
