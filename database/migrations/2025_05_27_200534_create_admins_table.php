@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('centres', function (Blueprint $table) {
-    $table->id();
-    $table->string('nom');
-    $table->string('ville');
-    $table->string('adresse');
-    $table->string('telephone')->nullable();
-    $table->integer('capacite_jour')->default(50);
-    $table->timestamps();
-});
-
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('centres');
+        Schema::dropIfExists('admins');
     }
 };

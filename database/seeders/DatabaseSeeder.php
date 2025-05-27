@@ -13,12 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
-{
-    \App\Models\Centre::factory()->count(5)->create();
-    \App\Models\Citoyen::factory()->count(20)->create();
-    \App\Models\RendezVous::factory()->count(30)->create();
-}
+        $this->call([
+            CentreCreneauSeeder::class,
+        ]);
+
+        \App\Models\Centre::factory()->count(5)->create();
+        \App\Models\Citoyen::factory()->count(20)->create();
+        \App\Models\RendezVous::factory()->count(30)->create();
 
         User::factory()->create([
             'name' => 'Test User',
