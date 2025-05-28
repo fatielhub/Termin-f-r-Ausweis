@@ -6,6 +6,8 @@
     <title>@yield('title', 'CNI Rendez-vous')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     <style>
         :root {
@@ -122,45 +124,60 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <img src="{{ asset('images/LOGO.png') }}" alt="CNI Rendez-vous" style="height:40px;" class="me-2">
-                <div class="d-flex flex-column">
-                    <span class="fw-bold">CNI Rendez-vous</span>
-                    <small class="text-muted">Service Officiel</small>
+     <!-- Navbar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="{{ asset('images/LOGO.png') }}" alt="logo" class="h-12 w-12 rounded-lg">
+                <div class="flex flex-col leading-tight">
+                    <h1 class="text-green-800 font-extrabold text-2xl leading-tight">CNI Rendez-vous</h1>
+                    <p class="text-sm text-gray-600">Service officiel</p>
                 </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="{{ route('precommande.type') }}" class="btn btn-success me-2">
-                            <i class="fas fa-calendar-plus me-1"></i> Prendre rendez-vous
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('precommande.suivi') }}" class="btn btn-outline-success me-2">
-                            <i class="fas fa-search me-1"></i> Suivre ma demande
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('faq') }}" class="btn btn-outline-secondary me-2">
-                            <i class="fas fa-question-circle me-1"></i> FAQ
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/admin/login') }}" class="btn btn-outline-secondary">
-                            <i class="fas fa-user-shield me-1"></i> Admin
-                        </a>
-                    </li>
-                </ul>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="{{ route('faq') }}" class="flex flex-col items-center text-gray-700 hover:text-green-600 text-sm">
+                    <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-1">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4c-.71 0-1.36-.2-1.907-.55L8 16v-2.586a1 1 0 00-.293-.707l-1.414-1.414A1 1 0 004.586 9H2m4 0a2 2 0 114 0M2 16h.01M6 16h.01" />
+                        </svg>
+                    </div>
+                    FAQ
+                    <p class="text-xs text-gray-500">Questions fréquentes</p>
+                </a>
+
+                <a href="{{ route('precommande.type') }}" class="flex flex-col items-center text-gray-700 hover:text-green-600 text-sm">
+                    <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-1">
+                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 19h14M5 15h14" />
+                         </svg>
+                    </div>
+                    Rendez-vous
+                    <p class="text-xs text-gray-500">Réserver en ligne</p>
+                </a>
+                
+                <a href="{{ route('precommande.suivi') }}" class="flex flex-col items-center text-gray-700 hover:text-green-600 text-sm">
+                    <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-1">
+                        <svg  class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    Suivi
+                    <p class="text-xs text-gray-500">Suivre ma demande</p>
+                </a>
+
+                <a href="{{ route('admin.login') }}" class="flex flex-col items-center text-gray-700 hover:text-green-600 text-sm">
+                    <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-1">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    Admin
+                    <p class="text-xs text-gray-500">Espace administration</p>
+                </a>
             </div>
         </div>
     </nav>
-
     <main class="container">
         @yield('content')
     </main>
