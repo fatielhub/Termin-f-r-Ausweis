@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Première demande de CNIE - Informations des grands-parents')
+
 @section('content')
+@section('title', 'Première demande de CNIE - Informations des grands-parents')
 <div class="d-flex justify-content-center">
     <div class="card shadow-lg p-4" style="max-width: 700px; width: 100%;">
         <div class="mb-4">
@@ -61,4 +62,4 @@
         </form>
     </div>
 </div>
-@endsection 
+@endsection

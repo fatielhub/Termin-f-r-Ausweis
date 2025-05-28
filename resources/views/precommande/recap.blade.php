@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Récapitulatif de la demande')
+
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="card shadow-lg p-4" style="max-width: 700px; width: 100%;">

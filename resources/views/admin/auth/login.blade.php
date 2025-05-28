@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Admin Login')
+
 @section('content')
 <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 200px);">
     <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">

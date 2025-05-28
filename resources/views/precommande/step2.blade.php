@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Première demande de CNIE - Informations des parents')
+
 @section('content')
 <div class="d-flex justify-content-center">
     <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%;">
