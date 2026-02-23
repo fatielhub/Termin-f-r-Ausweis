@@ -29,4 +29,4 @@ Das Projekt enthält Benutzer-Authentifizierung, Terminbuchung, CRUD-Funktionen 
 ## Installation
 1. Repository klonen:
 ```bash
-git clone https://github.com/USERNAME/RendezvousCNI.git
+https://github.com/fatielhub/Termin-f-r-Ausweis.git
