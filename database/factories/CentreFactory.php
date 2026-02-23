@@ -22,6 +22,10 @@ class CentreFactory extends Factory
         'adresse' => $this->faker->address(),
         'telephone' => $this->faker->phoneNumber(),
         'capacite_jour' => $this->faker->numberBetween(30, 100),
+        'email' => $this->faker->unique()->safeEmail(),
+        'actif' => true,
+        'heure_ouverture' => '08:00',
+        'heure_fermeture' => '16:00',
     ];
 }
 }

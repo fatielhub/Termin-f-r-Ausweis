@@ -12,7 +12,7 @@ Route::resource('rendezvous', RendezvousController::class);
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/precommande/type', 'App\\Http\\Controllers\\PrecommandeWebController@type')->name('precommande.type');
 Route::match(['get','post'], '/precommande/step1', 'App\\Http\\Controllers\\PrecommandeWebController@step1')->name('precommande.step1');

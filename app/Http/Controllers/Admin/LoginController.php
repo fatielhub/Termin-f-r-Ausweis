@@ -40,7 +40,6 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'email' => 'Email ou mot de passe incorrect. Veuillez vérifier vos identifiants.',
-            'password' => 'Email ou mot de passe incorrect. Veuillez vérifier vos identifiants.'
         ])->withInput($request->except('password'));
     }
 

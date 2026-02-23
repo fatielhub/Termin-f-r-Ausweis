@@ -15,17 +15,19 @@ class CentreCreneauSeeder extends Seeder
      */
     public function run(): void
     {
-        // Création d'un centre
-        $centre = Centre::create([
-            'nom' => 'Centre National Casablanca',
-            'adresse' => '123 Rue Principale',
-            'ville' => 'Casablanca',
-            'telephone' => '0522123456',
-            'email' => 'centre@cni.ma',
-            'actif' => true,
-            'heure_ouverture' => '08:00',
-            'heure_fermeture' => '16:00',
-        ]);
+        // Création (idempotente) d'un centre
+        $centre = Centre::firstOrCreate(
+            ['email' => 'centre@cni.ma'],
+            [
+                'nom' => 'Centre National Casablanca',
+                'adresse' => '123 Rue Principale',
+                'ville' => 'Casablanca',
+                'telephone' => '0522123456',
+                'actif' => true,
+                'heure_ouverture' => '08:00',
+                'heure_fermeture' => '16:00',
+            ]
+        );
 
         // Création de créneaux pour ce centre
         for ($i = 0; $i < 5; $i++) {

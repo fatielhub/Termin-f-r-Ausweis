@@ -1,132 +1,132 @@
 @extends('layouts.app')
-
-@section('title', 'CNI Rendez-vous - Pré-demande')
+@section('title', 'Pré-demande CNI — CNI Rendez-vous')
 
 @section('content')
-<div class="bg-white">
-    <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Pré-demande CNI
-            </h2>
-            <p class="mt-4 text-lg text-gray-500">
-                Remplissez ce formulaire pour commencer votre demande de CNI.
-            </p>
+<div class="container-narrow py-12">
 
-            <form action="{{ route('precommande.recap') }}" method="POST" class="mt-8 space-y-6">
+    <div class="text-center mb-10">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-400 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-200">
+            <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+        </div>
+        <h1 class="text-2xl font-extrabold text-gray-900 mb-2">Pré-demande CNI</h1>
+        <p class="text-gray-500">Remplissez ce formulaire pour commencer votre demande de carte nationale.</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+
+            @if($errors->any())
+                <div class="alert-danger mb-6">
+                    <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <div>@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>
+                </div>
+            @endif
+
+            <form action="{{ route('precommande.recap') }}" method="POST">
                 @csrf
-                
-                <!-- Type de demande -->
-                <div>
-                    <label for="type_demande" class="block text-sm font-medium text-gray-700">
-                        Type de demande
-                    </label>
-                    <select id="type_demande" name="type_demande" required
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
-                        <option value="">Sélectionnez un type</option>
-                        <option value="premiere">Première demande</option>
-                        <option value="renouvellement">Renouvellement</option>
-                        <option value="duplicata">Duplicata</option>
+
+                {{-- Type --}}
+                <div class="form-group">
+                    <label class="form-label" for="type_demande">Type de demande <span class="text-red-500">*</span></label>
+                    <select id="type_demande" name="type_demande" class="form-select" required>
+                        <option value="">— Sélectionnez un type —</option>
+                        <option value="premiere" {{ old('type_demande') === 'premiere' ? 'selected' : '' }}>Première demande</option>
+                        <option value="renouvellement" {{ old('type_demande') === 'renouvellement' ? 'selected' : '' }}>Renouvellement</option>
+                        <option value="duplicata" {{ old('type_demande') === 'duplicata' ? 'selected' : '' }}>Duplicata</option>
                     </select>
                 </div>
 
-                <!-- Informations personnelles -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium text-gray-900">Informations personnelles</h3>
-                    
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label for="nom" class="block text-sm font-medium text-gray-700">Nom</label>
-                            <input type="text" name="nom" id="nom" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div>
-                            <label for="prenom" class="block text-sm font-medium text-gray-700">Prénom</label>
-                            <input type="text" name="prenom" id="prenom" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <div class="border-t border-gray-100 my-6"></div>
+
+                {{-- Personal Info --}}
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    Informations personnelles
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+                    <div class="form-group">
+                        <label class="form-label" for="nom">Nom <span class="text-red-500">*</span></label>
+                        <input type="text" id="nom" name="nom" class="form-input" value="{{ old('nom') }}" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="prenom">Prénom <span class="text-red-500">*</span></label>
+                        <input type="text" id="prenom" name="prenom" class="form-input" value="{{ old('prenom') }}" placeholder="Votre prénom" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date_naissance">Date de naissance <span class="text-red-500">*</span></label>
+                        <input type="date" id="date_naissance" name="date_naissance" class="form-input" value="{{ old('date_naissance') }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lieu_naissance">Lieu de naissance <span class="text-red-500">*</span></label>
+                        <input type="text" id="lieu_naissance" name="lieu_naissance" class="form-input" value="{{ old('lieu_naissance') }}" placeholder="Ville" required>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-100 my-6"></div>
+
+                {{-- Address --}}
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Adresse
+                </h3>
+                <div class="form-group">
+                    <label class="form-label" for="adresse">Adresse complète <span class="text-red-500">*</span></label>
+                    <input type="text" id="adresse" name="adresse" class="form-input" value="{{ old('adresse') }}" placeholder="Numéro, rue, quartier" required>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+                    <div class="form-group">
+                        <label class="form-label" for="ville">Ville <span class="text-red-500">*</span></label>
+                        <input type="text" id="ville" name="ville" class="form-input" value="{{ old('ville') }}" placeholder="Votre ville" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="code_postal">Code postal <span class="text-red-500">*</span></label>
+                        <input type="text" id="code_postal" name="code_postal" class="form-input" value="{{ old('code_postal') }}" placeholder="10000" required>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-100 my-6"></div>
+
+                {{-- Contact --}}
+                <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    Coordonnées
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-5">
+                    <div class="form-group">
+                        <label class="form-label" for="telephone">Téléphone <span class="text-red-500">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <svg class="input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            <input type="tel" id="telephone" name="telephone" class="form-input pl-11" value="{{ old('telephone') }}" placeholder="0600000000" required>
                         </div>
                     </div>
-
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label for="date_naissance" class="block text-sm font-medium text-gray-700">Date de naissance</label>
-                            <input type="date" name="date_naissance" id="date_naissance" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div>
-                            <label for="lieu_naissance" class="block text-sm font-medium text-gray-700">Lieu de naissance</label>
-                            <input type="text" name="lieu_naissance" id="lieu_naissance" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email <span class="text-red-500">*</span></label>
+                        <div class="input-icon-wrapper">
+                            <svg class="input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <input type="email" id="email" name="email" class="form-input pl-11" value="{{ old('email') }}" placeholder="exemple@mail.com" required>
                         </div>
                     </div>
                 </div>
 
-                <!-- Adresse -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium text-gray-900">Adresse</h3>
-                    
-                    <div>
-                        <label for="adresse" class="block text-sm font-medium text-gray-700">Adresse complète</label>
-                        <input type="text" name="adresse" id="adresse" required
-                               class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                    </div>
+                <div class="border-t border-gray-100 my-6"></div>
 
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label for="ville" class="block text-sm font-medium text-gray-700">Ville</label>
-                            <input type="text" name="ville" id="ville" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div>
-                            <label for="code_postal" class="block text-sm font-medium text-gray-700">Code postal</label>
-                            <input type="text" name="code_postal" id="code_postal" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Coordonnées -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-medium text-gray-900">Coordonnées</h3>
-                    
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div>
-                            <label for="telephone" class="block text-sm font-medium text-gray-700">Téléphone</label>
-                            <input type="tel" name="telephone" id="telephone" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" name="email" id="email" required
-                                   class="mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Centre de réception -->
-                <div>
-                    <label for="centre" class="block text-sm font-medium text-gray-700">
-                        Centre de réception préféré
-                    </label>
-                    <select id="centre" name="centre" required
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
-                        <option value="">Sélectionnez un centre</option>
-                        <option value="centre1">Centre 1 - Ville principale</option>
-                        <option value="centre2">Centre 2 - Quartier nord</option>
-                        <option value="centre3">Centre 3 - Quartier sud</option>
+                {{-- Centre --}}
+                <div class="form-group">
+                    <label class="form-label" for="centre">Centre de réception préféré <span class="text-red-500">*</span></label>
+                    <select id="centre" name="centre" class="form-select" required>
+                        <option value="">— Sélectionnez un centre —</option>
+                        <option value="centre1" {{ old('centre') === 'centre1' ? 'selected' : '' }}>Centre 1 — Ville principale</option>
+                        <option value="centre2" {{ old('centre') === 'centre2' ? 'selected' : '' }}>Centre 2 — Quartier nord</option>
+                        <option value="centre3" {{ old('centre') === 'centre3' ? 'selected' : '' }}>Centre 3 — Quartier sud</option>
                     </select>
                 </div>
 
-                <div class="pt-5">
-                    <button type="submit"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        Continuer
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-full btn-lg mt-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                    Continuer
+                </button>
             </form>
         </div>
     </div>
